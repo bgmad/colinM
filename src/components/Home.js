@@ -8,6 +8,16 @@ const Title = styled.h1`
   font-size: 4rem;
   z-index: 10;
 `;
+const Section = styled.section`
+  color: white;
+`;
+const HomeContainer = styled.div`
+  width: 70%;
+  animation: slideInFromBottom 2s ease-out 1s;
+`;
+const ImageContainer = styled.div`
+  width: 100%;
+`;
 
 export default class Home extends React.Component {
     constructor({ abstract, name, headshot }) {
@@ -33,17 +43,20 @@ export default class Home extends React.Component {
 
     render() {
         return (
-          <div className="home">
+          <HomeContainer className="home">
+            {/* Title showing the name */}
             <Title>{this.state.name && this.state.name}</Title>
-            <div className="headshot">
-                {this.state.headshot && <img src={this.state.headshot.fields.file.url} alt={this.state.headshot.title}/>}
-            </div>
+            {/* Image */}
+            <ImageContainer className="headshot">
+                {this.state.headshot && <img src={this.state.headshot.fields.file.url} alt={this.state.headshot.title} style={{width: "100%"}}/>}
+            </ImageContainer>
+            {/* Short description */}
             <article>
-                <section>
+                <Section>
                     {this.state.abstract && documentToReactComponents(this.state.abstract)}
-                </section>
+                </Section>
             </article>
-          </div>
+          </HomeContainer>
         );
       }
 }
